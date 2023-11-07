@@ -1,8 +1,12 @@
-<h1>This is the films USER_INFO page.</h1>
-<p>Username: Fabrício</p>
-<h3>Link to the website pages:</h3>
-<ul>
-  <li><a href="{% url 'home' %}">Home Page</a></li>
-  <li><a href="{% url 'films:main' %}">Films Main Page</a></li>
-  <li><a href="{% url 'films:user_info' %}">Films User_Info Page</a></li>
-</ul>
+{% extends 'base.html' %}
+{% block content %}
+<h1>This is the films USER_INFO page</h1>
+<br>
+{% if userinfo %}
+  <h4>username: {{userinfo.username}}</h4>
+  <h4>country: {{userinfo.country}}</h4>
+{% else %}
+  <h4>username: not informed</h4>
+  <h4>country: not informed</h4>
+{% endif %}
+{% endblock  %}

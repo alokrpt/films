@@ -1,7 +1,11 @@
-<h1>This is the films MAIN page.</h1>
-<h3>Link to the website pages:</h3>
+{% extends 'base.html' %}
+{% block content %}
+<h1>This is the films MAIN page</h1>
+<br>
+<h4>Some Pixar Movies:</h4>
 <ul>
-  <li><a href="{% url 'home' %}">Home Page</a></li>
-  <li><a href="{% url 'films:main' %}">Films Main Page</a></li>
-  <li><a href="{% url 'films:user_info' %}">Films User_Info Page</a></li>
+  {% for number in '012'|make_list %}
+    <li>Toy Story {{forloop.counter}}</li>
+  {% endfor %}
 </ul>
+{% endblock  %}
