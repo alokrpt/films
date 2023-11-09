@@ -2,6 +2,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import Film
+import plotly.express as px
 
 
 def home(request):
@@ -63,3 +64,30 @@ def details(request, id):
     # film = Film.objects.filter(id=id)[0]
     context = {'film': film}
     return render(request, 'films/details.html', context)
+
+def get_data():
+    df = px.data.gapminder()
+    return df
+
+def create_plot(df, year):
+    fig = px.scatter(
+      data_frame = df.query(f'year=={year}'),
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      color = 'continent',
+      size = 'pop',
+      height = 500,
+      log_x=True,
+      size_max=60,
+      hover_name="country")
+      
+    fig =  fig.to_html()
+    return fig
+
+def gapminder(request, year):
+    df = get_data()
+    print(df)
+    fig = create_plot(df, year)
+    context = {"plot": fig, "year": year}
+    template = 'gapminder.html'
+    return render(request, template, context)

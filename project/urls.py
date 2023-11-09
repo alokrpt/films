@@ -22,4 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('films/', include('films.urls')),
+    path('gapminder/<int:year>', views.gapminder, name='gapminder'),
+
 ]
